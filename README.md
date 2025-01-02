@@ -1,16 +1,79 @@
-# finai_app
+# 🤖 Multi-Agent Chatbot 🤖
 
-A new Flutter project.
+Welcome to the **Multi-Agent Chatbot** project! This is a Flutter-based application that allows you to chat with multiple agents in parallel, with each agent connected to a unique API. 🧑‍💻✨
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🌟 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🗨️ **Chat with multiple agents simultaneously**
+- 🎨 Modern and responsive UI
+- 🔗 Dynamic API integration for custom agents
+- 🛠️ Built with **Flutter**, providing cross-platform support
+- 🌈 Customizable agent names and APIs
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📸 Screenshots
+
+![App Screenshot](path_to_screenshot_image_here)
+
+---
+
+## 🚀 How to Run the Project
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/multi-agent-chatbot.git
+   ```
+2. Navigate into the project folder:
+   ```bash
+   cd multi-agent-chatbot
+   ```
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Run the app on your desired platform:
+   ```bash
+   flutter run
+   ```
+
+---
+
+## 🛠️ Technologies Used
+
+- **Flutter**: Cross-platform UI framework
+- **Dart**: Programming language for Flutter
+- **url_launcher**: For launching external links
+
+---
+
+## 👨‍💻 About the Developer
+
+Hi, I’m **Nadav Chen**! 👋
+
+- 💻 [GitHub](https://github.com/Nadav23AnT)
+- 🌐 [LinkedIn](https://www.linkedin.com/in/nadavchen97/)
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🎉 Acknowledgments
+
+- Special thanks to the **Flutter** community for amazing resources and support.
+- Inspired by the idea of multi-agent systems.
+
+---
+
+## 🚩 Future Enhancements
+
+- 🔧 Add advanced chatbot APIs
+- 📱 Improve mobile responsiveness
+- 🖼️ Add more interactive animations
+
