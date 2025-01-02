@@ -1,0 +1,153 @@
+import 'package:flutter/material.dart';
+
+class ChatbotWidget extends StatefulWidget {
+  final String title;
+
+  const ChatbotWidget({super.key, required this.title});
+
+  @override
+  State<ChatbotWidget> createState() => _ChatbotWidgetState();
+}
+
+class _ChatbotWidgetState extends State<ChatbotWidget>
+    with SingleTickerProviderStateMixin {
+  final List<Map<String, String>> _messages = [];
+  final TextEditingController _controller = TextEditingController();
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _sendMessage() {
+    if (_controller.text.trim().isEmpty) return;
+
+    setState(() {
+      _messages.add({'user': 'You', 'text': _controller.text});
+      _controller.clear();
+
+      // Start fade animation for the user's message
+      _animationController.reset();
+      _animationController.forward();
+
+      // Simulated bot response
+      Future.delayed(const Duration(milliseconds: 500), () {
+        setState(() {
+          _messages.add({'user': widget.title, 'text': 'Hello from ${widget.title}!'});
+          _animationController.reset();
+          _animationController.forward(); // Start fade animation for bot's message
+        });
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.teal, width: 2),
+        borderRadius: BorderRadius.circular(12.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Text(
+            widget.title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.teal,
+            ),
+          ),
+          const Divider(color: Colors.teal),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _messages.length,
+              itemBuilder: (context, index) {
+                final message = _messages[index];
+                return FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Align(
+                    alignment: message['user'] == 'You'
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 4.0),
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: message['user'] == 'You'
+                            ? Colors.teal[100]
+                            : Colors.teal[50],
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Text(
+                        '${message['user']}: ${message['text']}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.teal[50],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    hintText: 'Type your message...',
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: _sendMessage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: const Text('Send'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

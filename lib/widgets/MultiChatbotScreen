@@ -1,0 +1,30 @@
+class MultiChatbotScreen extends StatelessWidget {
+  const MultiChatbotScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Multi-Chatbot App'),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: screenWidth > 600 // Check if screen is wide
+          ? Row(
+              children: const [
+                Expanded(child: ChatbotWidget(title: 'Chatbot 1')),
+                Expanded(child: ChatbotWidget(title: 'Chatbot 2')),
+                Expanded(child: ChatbotWidget(title: 'Chatbot 3')),
+              ],
+            )
+          : Column(
+              children: const [
+                Expanded(child: ChatbotWidget(title: 'Chatbot 1')),
+                Expanded(child: ChatbotWidget(title: 'Chatbot 2')),
+                Expanded(child: ChatbotWidget(title: 'Chatbot 3')),
+              ],
+            ),
+    );
+  }
+}
